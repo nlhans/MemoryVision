@@ -44,16 +44,32 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Triton">
+      <HintPath>..\Binaries\Triton.dll</HintPath>
+    </Reference>
+    <Reference Include="Triton.Controls">
+      <HintPath>..\Binaries\Triton.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Triton.Database">
+      <HintPath>..\Binaries\Triton.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Triton.Joysticks">
+      <HintPath>..\Binaries\Triton.Joysticks.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="CheatEngineReader.cs" />
+    <Compile Include="MemoryVision.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MemoryVision.Designer.cs">
+      <DependentUpon>MemoryVision.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MemoryVision.resx">
+      <DependentUpon>MemoryVision.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
