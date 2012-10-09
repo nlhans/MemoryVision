@@ -7,7 +7,23 @@ namespace MemoryVision
         public int ID;
         public int UI_ID;
         public string Name;
-        public MemoryChannelType Type;
+        public MemoryChannelType Type
+        {
+            get { return _Type; }
+            set
+            {
+                _Type = value;
+                switch (value)
+                {
+                    default:
+                        DataSize = 4;
+                        break;
+                }
+            }
+        }
+
+        private MemoryChannelType _Type;
+        public uint DataSize;
         public string Parameters;
         public IntPtr Address;
 

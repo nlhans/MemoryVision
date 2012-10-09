@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using MemoryVision.DataGrabber;
+using Triton;
 using Triton.Controls;
 using Triton.Memory;
 
@@ -14,10 +16,13 @@ namespace MemoryVision
         private Process _mProcess;
         private Timer _mLiveWatch;
         private CheatEngineReader _mMemoryList;
+        private Grabber _mGrabber;
 
         public MemoryVision()
         {
             InitializeComponent();
+
+            FormClosing += new FormClosingEventHandler(MemoryVision_FormClosing);
 
             _mTable = new VisualListDetails(true);
             _mTable.Columns.Add("ID", "ID", 70);
@@ -31,6 +36,11 @@ namespace MemoryVision
             _mLiveWatch.Start();
 
             this.split.Panel2.Controls.Add(_mTable);
+        }
+
+        void MemoryVision_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TritonBase.TriggerExit();
         }
 
         private void _mLiveWatch_Tick(object sender, EventArgs e)
@@ -105,6 +115,20 @@ namespace MemoryVision
                                                            ch.TypeToString(),
                                                            "0.000"
                                                        }));
+            }
+
+
+            _mGrabber = new Grabber(_mMemoryList, _mMemory);
+        }
+
+        private void bt_control_Click(object sender, EventArgs e)
+        {
+            if (_mGrabber != null)
+            {
+                if (_mGrabber.Running)
+                    _mGrabber.Stop();
+                else
+                    _mGrabber.Start();
             }
         }
     }

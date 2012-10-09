@@ -59,6 +59,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheatEngineReader.cs" />
+    <Compile Include="DataGrabber\Channels.cs" />
+    <Compile Include="DataGrabber\Configuration.cs" />
+    <Compile Include="DataGrabber\Grabber.cs" />
+    <Compile Include="DataGrabber\MicroStopwatch.cs" />
+    <Compile Include="DataGrabber\Triggering.cs" />
+    <Compile Include="DataGrabber\Waveform.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="MemoryChannel.cs" />
+    <Compile Include="MemoryChannelType.cs" />
     <Compile Include="MemoryVision.cs">
       <SubType>Form</SubType>
     </Compile>
