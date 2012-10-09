@@ -5,69 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using Triton.Memory;
 
 namespace MemoryVision
 {
-    public enum MemoryChannelType
-    {
-        BINARY,
-        INT8,
-        INT16,
-        INT32,
-        UINT8,
-        UINT16,
-        UINT32,
-        FLOAT,
-        DOUBLE,
-        STRING,
-        CHAR
-    } ;
-
-    public static partial class Extensions
-    {
-        public static string ReadAsString(this MemoryReader reader, MemoryChannel ch)
-        {
-            switch(ch.Type)
-            {
-                case MemoryChannelType.FLOAT:
-                    return reader.ReadFloat(ch.Address).ToString("0.0000");
-                    break;
-                case MemoryChannelType.INT32:
-                    return reader.ReadInt32(ch.Address).ToString();
-                    break;
-                default:
-                    return "??";
-            }
-        }
-    }
-
-    public class MemoryChannel
-    {
-        public int ID;
-        public int UI_ID;
-        public string Name;
-        public MemoryChannelType Type;
-        public string Parameters;
-        public IntPtr Address;
-
-        public string TypeToString()
-        {
-            switch(Type)
-            {
-                case MemoryChannelType.FLOAT:
-                    return "float";
-                    break;
-                case MemoryChannelType.INT32:
-                    return "Int32";
-                    break;
-                default:
-                    return "??";
-                    break;
-            }
-        }
-    }
-
     public class CheatEngineReader
     {
         public List<MemoryChannel> Channels = new List<MemoryChannel>();
