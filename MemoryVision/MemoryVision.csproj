@@ -74,6 +74,9 @@
     <Compile Include="MemoryVision.Designer.cs">
       <DependentUpon>MemoryVision.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemoryWaveform.cs" />
+    <Compile Include="MemoryWaveformReader.cs" />
+    <Compile Include="MemoryWaveformWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MemoryVision.resx">

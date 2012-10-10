@@ -4,7 +4,7 @@
     {
         public int SamplesAfterTrigger;
         public int SamplesBeforeTrigger;
-        public int Samples;
+        public int Samples{get { return SamplesAfterTrigger + SamplesBeforeTrigger; }}
 
         private Grabber _mGrabber;
         public int SampleWaitTime;

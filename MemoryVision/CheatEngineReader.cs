@@ -8,6 +8,15 @@ using System.Xml;
 
 namespace MemoryVision
 {
+    public class CheatEngineWriter
+    {
+        public CheatEngineWriter(List<MemoryChannel> channels, IntPtr offset, string exe)
+        {
+            //
+
+        }
+    }
+
     public class CheatEngineReader
     {
         public List<MemoryChannel> Channels = new List<MemoryChannel>();

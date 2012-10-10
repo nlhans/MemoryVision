@@ -83,5 +83,14 @@ namespace MemoryVision.DataGrabber
 
             return _mGrabber.Channels.ConvertToObject(channel, RingBuffer[channel][index]);
         }
+
+        public List<byte[]> GetData(int channel)
+        {
+            return DataBuffer[channel];
+        }
+        public List<byte[]> this[int channel]
+        {
+            get { return DataBuffer[channel]; }
+        }
     }
 }

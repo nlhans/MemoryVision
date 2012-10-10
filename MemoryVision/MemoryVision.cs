@@ -17,7 +17,7 @@ namespace MemoryVision
         private Timer _mLiveWatch;
         private CheatEngineReader _mMemoryList;
         private Grabber _mGrabber;
-
+        private MemoryWaveform _mWaveform;
         public MemoryVision()
         {
             InitializeComponent();
@@ -36,6 +36,8 @@ namespace MemoryVision
             _mLiveWatch.Start();
 
             this.split.Panel2.Controls.Add(_mTable);
+
+            _mWaveform = new MemoryWaveform();
         }
 
         void MemoryVision_FormClosing(object sender, FormClosingEventArgs e)
@@ -55,6 +57,21 @@ namespace MemoryVision
                 else
                     _mTable.Items[i].ForeColor = Color.Black;
                 _mTable.Items[i].SubItems[4].Text = s;
+            }
+
+            // Also update.
+            if(_mGrabber != null)
+            {
+                if (_mGrabber.Running)
+                {
+                    if (_mGrabber.Triggered)
+                        lbl_control.Text = "Status: Sampling [" + (_mGrabber.Progress / 10.0).ToString() + "%]";
+                    else
+                        lbl_control.Text = "Status: Waiting for trigger";
+                    pb_control.Value = (int)Math.Floor(_mGrabber.Progress);
+                }
+                else
+                    lbl_control.Text = "Status: Finished";
             }
         }
 
@@ -119,6 +136,12 @@ namespace MemoryVision
 
 
             _mGrabber = new Grabber(_mMemoryList, _mMemory);
+            _mGrabber.Done += new Signal(_mGrabber_Done);
+        }
+
+        void _mGrabber_Done(object sender)
+        {
+            _mWaveform.Load(_mGrabber);
         }
 
         private void bt_control_Click(object sender, EventArgs e)

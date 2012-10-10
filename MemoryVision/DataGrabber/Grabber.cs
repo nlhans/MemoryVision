@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using Triton;
 using Triton.Memory;
@@ -11,6 +7,8 @@ namespace MemoryVision.DataGrabber
 {
     public class Grabber
     {
+        public event Signal Done; 
+
         public Channels Channels { get; set; }
         public Waveform Waveform { get; set; }
         public Triggering Trigger { get; set; }
@@ -22,7 +20,20 @@ namespace MemoryVision.DataGrabber
         private bool _mGrabberRunning = false;
         public bool Running { get { return _mGrabberRunning; } }
         public bool Triggered { get { return Trigger.IsTriggered; } }
-
+        public double Progress
+        {
+            get
+            {
+                if(Trigger.IsTriggered)
+                {
+                    return (1000.0*Waveform.SampleIndex + Config.SamplesBeforeTrigger)/Config.Samples;
+                }
+                else
+                {
+                    return (1000.0*Math.Min(Config.SamplesBeforeTrigger, Waveform.WriteCount))/Config.Samples;
+                }
+            }
+        }
         private long _mGrabberCaptureTime = 0;
         private long _mGrabberWaitTime = 0;
 
@@ -31,16 +42,14 @@ namespace MemoryVision.DataGrabber
             Config = new Configuration(this);
 
             //TEMPORARY configuration!
-            Config.SamplesBeforeTrigger = 200;
-            Config.SamplesAfterTrigger = 200;
-            Config.Samples = 400;
-            Config.SampleWaitTime = 5000;//us, 50ms here 
-
-
+            Config.SamplesBeforeTrigger = 1000;
+            Config.SamplesAfterTrigger = 9000;
+            Config.SampleWaitTime = 10000;//ms, 1ms here 
 
             Channels = new Channels(this,table);
             Waveform = new Waveform(this);
             Trigger = new Triggering(this);
+
             this.Reader = reader;
 
             _mGrabberTiming = new MicroStopwatch();
@@ -78,12 +87,15 @@ namespace MemoryVision.DataGrabber
                     Trigger.Check();
                     _mGrabberCaptureTime = _mGrabberTiming.ElapsedMicroseconds;
                 }
-                //Debug.WriteLine(_mGrabberTiming.ElapsedMicroseconds.ToString());
                 DataGrabber_Timing();
             }
 
             // Finalize waveform
             Waveform.Finalize();
+
+            // Sent event DONE
+            if(Done!=null)
+                Done(this);
         }
 
         public void Start()

@@ -25,7 +25,7 @@ namespace MemoryVision
         private MemoryChannelType _Type;
         public uint DataSize;
         public string Parameters;
-        public IntPtr Address;
+        public IntPtr Address; // Support for pointers?
 
         public string TypeToString()
         {
