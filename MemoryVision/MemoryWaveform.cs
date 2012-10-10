@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using MemoryVision.DataGrabber;
+using Triton;
 
 namespace MemoryVision
 {
     public class MemoryWaveform
     {
+        public event Signal Loaded;
         public List<MemoryChannel> Channels;
         public Dictionary<int,List<byte[]>> Data;
         public string File;
@@ -22,6 +21,7 @@ namespace MemoryVision
         public void Load(string file)
         {
             MemoryWaveformReader rd= new MemoryWaveformReader(this, file);
+            rd.Done += TriggerLoaded;
         }
 
         public void Load(Grabber grabber)
@@ -38,6 +38,14 @@ namespace MemoryVision
 
             // etc.
             Save("tmp");
+            TriggerLoaded(0);
+        }
+
+        private void TriggerLoaded(object o)
+        {
+
+            if (Loaded != null)
+                Loaded(this);
         }
     }
 }

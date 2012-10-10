@@ -38,6 +38,22 @@ namespace MemoryVision
             this.split.Panel2.Controls.Add(_mTable);
 
             _mWaveform = new MemoryWaveform();
+            _mWaveform.Loaded += new Signal(_mWaveform_Loaded);
+        }
+
+        void _mWaveform_Loaded(object sender)
+        {
+            if(this.lbl_waveform_file.InvokeRequired)
+            {
+                this.Invoke(new Signal(_mWaveform_Loaded), new object[1] {sender});
+
+                return;
+            }
+
+            lbl_waveform_file.Text = "File: " +_mWaveform.File;
+            int ch = _mWaveform.Channels.Count;
+            int samples=_mWaveform.Data[_mWaveform.Channels[0].ID].Count;
+            lbl_waveform_data.Text = ch.ToString() + "ch " + Math.Round(samples*ch/1000.0,2).ToString()+"ksp";
         }
 
         void MemoryVision_FormClosing(object sender, FormClosingEventArgs e)
@@ -153,6 +169,22 @@ namespace MemoryVision
                 else
                     _mGrabber.Start();
             }
+        }
+
+        private void bt_load_waveform_Click(object sender, EventArgs e)
+        {
+            string file = "tmp";
+
+            // Load
+            _mWaveform.Load(file);
+
+        }
+
+        private void bt_view_waveform_Click(object sender, EventArgs e)
+        {
+            WaveformView viewer = new WaveformView(_mWaveform);
+            viewer.Show();
+
         }
     }
 }

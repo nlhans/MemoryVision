@@ -44,7 +44,14 @@ namespace MemoryVision.DataGrabber
             //TEMPORARY configuration!
             Config.SamplesBeforeTrigger = 1000;
             Config.SamplesAfterTrigger = 9000;
-            Config.SampleWaitTime = 10000;//ms, 1ms here 
+            Config.SampleWaitTime = 100;//ms, 1ms here 
+
+            Config.Trigger_Simple_Channel = 0; // gear
+            Config.Trigger_Simple_Condition = TriggerCondition.OUT_RANGE; // Rising up
+            Config.Trigger_Simple_ValueType = MemoryChannelType.INT32;
+            Config.Trigger_Simple_Value = new byte[4] { 3, 0, 0, 0 }; // INT32 (5)
+            Config.Trigger_Simple_Value2 = new byte[4] { 5, 0, 0, 0 }; // INT32 (5)
+            Config.Trigger_Simple = true;
 
             Channels = new Channels(this,table);
             Waveform = new Waveform(this);

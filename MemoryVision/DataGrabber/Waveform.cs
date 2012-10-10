@@ -78,10 +78,19 @@ namespace MemoryVision.DataGrabber
         public object GetRingValue(int channel, int offset)
         {
             int index = WriteIndex - offset;
-            if (index<0)
+            if (index < 0)
                 index += _mGrabber.Config.SamplesBeforeTrigger;
 
             return _mGrabber.Channels.ConvertToObject(channel, RingBuffer[channel][index]);
+        }
+
+        public byte[] GetRingData(int channel, int offset)
+        {
+            int index = WriteIndex - offset;
+            if (index < 0)
+                index += _mGrabber.Config.SamplesBeforeTrigger;
+
+            return RingBuffer[channel][index];
         }
 
         public List<byte[]> GetData(int channel)

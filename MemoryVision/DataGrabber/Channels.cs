@@ -21,6 +21,7 @@ namespace MemoryVision.DataGrabber
 
         public object ConvertToObject(int channel, byte[] bytes)
         {
+            if(bytes ==null) return 0;
             switch(DataChannels[channel].Type)
             {
                 case MemoryChannelType.INT32:

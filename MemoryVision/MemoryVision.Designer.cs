@@ -44,6 +44,8 @@
             this.bt_view_waveform = new System.Windows.Forms.Button();
             this.bt_store_waveform = new System.Windows.Forms.Button();
             this.bt_load_waveform = new System.Windows.Forms.Button();
+            this.lbl_waveform_file = new System.Windows.Forms.Label();
+            this.lbl_waveform_data = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.split)).BeginInit();
             this.split.Panel1.SuspendLayout();
             this.split.SuspendLayout();
@@ -78,7 +80,7 @@
             this.groupBox3.Controls.Add(this.bt_control);
             this.groupBox3.Controls.Add(this.bt_settings);
             this.groupBox3.Controls.Add(this.bt_triggering);
-            this.groupBox3.Location = new System.Drawing.Point(362, 12);
+            this.groupBox3.Location = new System.Drawing.Point(514, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(305, 85);
             this.groupBox3.TabIndex = 5;
@@ -172,13 +174,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbl_waveform_data);
+            this.groupBox1.Controls.Add(this.lbl_waveform_file);
             this.groupBox1.Controls.Add(this.bt_clear_waveform);
             this.groupBox1.Controls.Add(this.bt_view_waveform);
             this.groupBox1.Controls.Add(this.bt_store_waveform);
             this.groupBox1.Controls.Add(this.bt_load_waveform);
             this.groupBox1.Location = new System.Drawing.Point(181, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(175, 85);
+            this.groupBox1.Size = new System.Drawing.Size(327, 85);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Waveform";
@@ -200,6 +204,7 @@
             this.bt_view_waveform.TabIndex = 2;
             this.bt_view_waveform.Text = "View";
             this.bt_view_waveform.UseVisualStyleBackColor = true;
+            this.bt_view_waveform.Click += new System.EventHandler(this.bt_view_waveform_Click);
             // 
             // bt_store_waveform
             // 
@@ -218,6 +223,25 @@
             this.bt_load_waveform.TabIndex = 0;
             this.bt_load_waveform.Text = "Load";
             this.bt_load_waveform.UseVisualStyleBackColor = true;
+            this.bt_load_waveform.Click += new System.EventHandler(this.bt_load_waveform_Click);
+            // 
+            // lbl_waveform_file
+            // 
+            this.lbl_waveform_file.AutoSize = true;
+            this.lbl_waveform_file.Location = new System.Drawing.Point(168, 24);
+            this.lbl_waveform_file.Name = "lbl_waveform_file";
+            this.lbl_waveform_file.Size = new System.Drawing.Size(26, 13);
+            this.lbl_waveform_file.TabIndex = 5;
+            this.lbl_waveform_file.Text = "File:";
+            // 
+            // lbl_waveform_data
+            // 
+            this.lbl_waveform_data.AutoSize = true;
+            this.lbl_waveform_data.Location = new System.Drawing.Point(168, 53);
+            this.lbl_waveform_data.Name = "lbl_waveform_data";
+            this.lbl_waveform_data.Size = new System.Drawing.Size(51, 13);
+            this.lbl_waveform_data.TabIndex = 6;
+            this.lbl_waveform_data.Text = "0ch 0ksp";
             // 
             // MemoryVision
             // 
@@ -235,6 +259,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -257,6 +282,8 @@
         private System.Windows.Forms.ProgressBar pb_control;
         private System.Windows.Forms.Label lbl_control;
         private System.Windows.Forms.Label lbl_exe;
+        private System.Windows.Forms.Label lbl_waveform_data;
+        private System.Windows.Forms.Label lbl_waveform_file;
     }
 }
 

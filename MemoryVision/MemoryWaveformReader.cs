@@ -8,7 +8,7 @@ namespace MemoryVision
 {
     public class MemoryWaveformReader
     {
-        public Signal Done;
+        public event Signal Done;
         private MemoryWaveform _mWaveform;
         public MemoryWaveformReader(MemoryWaveform mwf, string file)
         {
@@ -45,6 +45,7 @@ namespace MemoryVision
             CheatEngineReader channels = new CheatEngineReader();
             channels.Read(file + ".ct"); // Channel File
 
+            _mWaveform.Data = new Dictionary<int, List<byte[]>>();
             _mWaveform.File = file;
             _mWaveform.Channels = new List<MemoryChannel>(channels.Channels);
 
