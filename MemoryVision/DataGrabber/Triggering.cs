@@ -71,7 +71,7 @@ namespace MemoryVision.DataGrabber
                             _mGrabber.Config.Trigger_Simple_Channel, value));
                         value2_double = Convert.ToDouble(_mGrabber.Channels.ConvertToObject(
                             _mGrabber.Config.Trigger_Simple_Channel, value2));
-                        if (!(data_double >= value_double && data_double <= value2_double))
+                        if (!(data_double > value_double && data_double < value2_double))
                             IsTriggered = true;
                         break;
 

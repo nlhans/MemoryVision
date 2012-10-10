@@ -14,6 +14,9 @@ namespace MemoryVision
                 case MemoryChannelType.INT32:
                     return reader.ReadInt32(ch.Address).ToString();
                     break;
+                case MemoryChannelType.DOUBLE:
+                    return reader.ReadDouble(ch.Address).ToString("0.0000");
+                    break;
                 default:
                     return "??";
             }

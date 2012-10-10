@@ -30,6 +30,9 @@ namespace MemoryVision.DataGrabber
                 case MemoryChannelType.FLOAT:
                     return (object)BitConverter.ToSingle(bytes, 0);
                     break;
+                case MemoryChannelType.DOUBLE:
+                    return (object)BitConverter.ToDouble(bytes, 0);
+                    break;
                 default:
                     return (object)0;
                     break;

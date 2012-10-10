@@ -28,7 +28,7 @@ namespace MemoryVision
 
         public void Read(string file)
         {
-            int i = 0;
+            int j=0,i = 0;
 
             MemoryChannel ch = new MemoryChannel();
             ch.ID = -1;
@@ -57,7 +57,7 @@ namespace MemoryVision
                                 case "ID":
                                     xml.Read();
                                     //ch.ID = Convert.ToInt32(xml.Value);
-                                    ch.ID = xml.ReadContentAsInt();
+                                    ch.ID = j++;//xml.ReadContentAsInt();
                                     break;
                                 case "Description":
                                     xml.Read();
@@ -74,6 +74,9 @@ namespace MemoryVision
                                             break;
                                         case "Float":
                                             ch.Type = MemoryChannelType.FLOAT;
+                                            break;
+                                        case "Double":
+                                            ch.Type = MemoryChannelType.DOUBLE;
                                             break;
                                     }
                                     break;

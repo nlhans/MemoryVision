@@ -15,6 +15,15 @@ namespace MemoryVision
                 _Type = value;
                 switch (value)
                 {
+                    case MemoryChannelType.UINT64:
+                        DataSize = 8;
+                        break;
+                    case MemoryChannelType.INT64:
+                        DataSize = 8;
+                        break;
+                    case MemoryChannelType.DOUBLE:
+                        DataSize = 8;
+                        break;
                     default:
                         DataSize = 4;
                         break;
@@ -32,11 +41,13 @@ namespace MemoryVision
             switch(Type)
             {
                 case MemoryChannelType.FLOAT:
-                    return "float";
+                    return "Float";
                     break;
                 case MemoryChannelType.INT32:
                     return "Int32";
                     break;
+                case MemoryChannelType.DOUBLE:
+                    return "Double";
                 default:
                     return "??";
                     break;
