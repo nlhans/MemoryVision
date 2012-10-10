@@ -35,6 +35,7 @@ namespace MemoryVision
         public uint DataSize;
         public string Parameters;
         public IntPtr Address; // Support for pointers?
+        public bool Continous=true; // Display as logic or as analogue?
 
         public string TypeToString()
         {

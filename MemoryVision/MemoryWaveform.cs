@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MemoryVision.DataGrabber;
 using Triton;
 
@@ -46,6 +47,26 @@ namespace MemoryVision
 
             if (Loaded != null)
                 Loaded(this);
+        }
+
+        public object GetData(int channel, int sample)
+        {
+            byte[] bytes = Data[channel][sample];
+            switch (Channels[channel].Type)
+            {
+                case MemoryChannelType.INT32:
+                    return (object)BitConverter.ToInt32(bytes, 0);
+                    break;
+                case MemoryChannelType.FLOAT:
+                    return (object)BitConverter.ToSingle(bytes, 0);
+                    break;
+                case MemoryChannelType.DOUBLE:
+                    return (object)BitConverter.ToDouble(bytes, 0);
+                    break;
+                default:
+                    return (object)0;
+                    break;
+            }
         }
     }
 }
