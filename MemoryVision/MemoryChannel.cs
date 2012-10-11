@@ -34,8 +34,36 @@ namespace MemoryVision
         private MemoryChannelType _Type;
         public uint DataSize;
         public string Parameters;
-        public IntPtr Address; // Support for pointers?
-        public bool Continous=true; // Display as logic or as analogue?
+        public IntPtr Address; // TODO: Support for pointers?
+        public bool Analogue // Display as logic or as analogue?
+        {
+            get
+            {
+                if (AnalogueAuto == 1)
+                {
+                    switch (_Type)
+                    {
+                        case MemoryChannelType.FLOAT:
+                            return true;
+                            break;
+                        case MemoryChannelType.DOUBLE:
+                            return true;
+                            break;
+                        default:
+                            return false;
+                            break;
+                    }
+                }
+                else if (AnalogueAuto == 0)
+                    return false;
+                else if (AnalogueAuto == 2)
+                    return true;
+
+                return true;
+            }
+        }
+
+        public int AnalogueAuto = 1; // 1=auto, 2=yes, 0=no///
 
         public string TypeToString()
         {

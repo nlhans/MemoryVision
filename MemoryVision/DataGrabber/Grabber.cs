@@ -42,8 +42,8 @@ namespace MemoryVision.DataGrabber
             Config = new Configuration(this);
 
             //TEMPORARY configuration!
-            Config.SamplesBeforeTrigger = 1000;
-            Config.SamplesAfterTrigger = 9000;
+            Config.SamplesBeforeTrigger = 750;
+            Config.SamplesAfterTrigger = 750;
             Config.SampleWaitTime = 10000;//ms, 1ms here 
 
             Config.Trigger_Simple_Channel = 0; // gear

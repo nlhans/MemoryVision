@@ -68,5 +68,10 @@ namespace MemoryVision
                     break;
             }
         }
+
+        public byte[] GetBytes(int channel, int sample)
+        {
+            return Data[channel][sample];
+        }
     }
 }
